@@ -1,5 +1,4 @@
 {
     "steps": {
-        "1": {"filter":"hello.js","params": []}
     }
 }

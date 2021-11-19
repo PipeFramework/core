@@ -70,6 +70,10 @@ const isValidConfiguration = (configFiltersName) => {
     throw new Error("The steps key is not found");
   }
 
+  if (Object.keys(config.steps).length === 0) {
+    throw new Error("The steps key is empty");
+  }
+
   const configKeys = Object.keys(config.steps);
 
   configKeys.forEach((key) => {
