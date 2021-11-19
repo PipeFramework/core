@@ -4,7 +4,7 @@
   "description": "A pipe filter framework",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/PipeFramework/core/issues"
   },
-  "homepage": "https://github.com/PipeFramework/core#readme"
+  "homepage": "https://github.com/PipeFramework/core#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "ora": "^6.0.1"
+  }
 }
