@@ -78,11 +78,25 @@ Une step contient :
 - possiblement `next`, l'ID de la step du prochain filtre à exécuter
 
 # Errors
-| Erreur | Description                           |
-| :----- | :----------                           |
-| 403    | Fichier de configuration invalide     |
-| 403    | Le filter ne retourne pas de fonction |
-| 403    | Exécution de la step a échoué         |
+| Erreur                                       | Description                                                  |
+| :------------------------------------------- | :----------------------------------------------------------- |
+| Directory not found.                         | Dossier du filtre introuvable                                |
+| No filters modules found.                    | Filtre non trouvé                                            |
+| Is not a filter module.                      | Filtre invalide                                              |
+| Configuration file not found                 | Fichier de configuration non trouvé                          |
+| The steps key is not found                   | Clé de l'étape non trouvée                                   |
+| The filter key not found on step             | Clé du filtre non trouvée                                    |
+| The params key is not an array for the step  | La clé du params n'est pas un tableau                        |
+| Step with id not found.                      | Étape non trouvée                                            |
+| Configuration file is not a valid json file. | Le fichier de configuration n'est pas un fichier JSON valide |
+| Step failed                                  | Échec de l'exécution de l'étape                              |
+| The steps key is empty                       | Clé d'étape non définie ou vide                              |
+| The filter could not be added                | Le filtre n'a pas pu être ajouté                             |
+| The filter could not be deleted              | Le filtre n'a pas pu être supprimé                           |
+| The step could not be added                  | L'étape n'a pas pu être ajoutée                              |
+| The step could not be deleted                | L'étape n'a pas pu être supprimée                            |
+| The project could not be installed           | Le projet n'a pas pu être installé                           |
+| The directory already exist                  | Nom de dossier déjà utilisé                                  |
 
 # Tools
 | Commande          | Action                                         | Description                                                                                 |
