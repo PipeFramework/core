@@ -1,0 +1,24 @@
+{
+  "name": "@pipeframework/core",
+  "version": "1.0.0",
+  "description": "A pipe filter framework",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PipeFramework/core.git"
+  },
+  "author": "PipeTeam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PipeFramework/core/issues"
+  },
+  "homepage": "https://github.com/PipeFramework/core#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "ora": "^6.0.1"
+  }
+}
