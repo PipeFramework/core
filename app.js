@@ -5,10 +5,10 @@ const FILTERS_DIRECTORY_NAME = "filters";
 const CONFIG_FILTERS_NAME = "config-filters";
 
 const start = () => {
-  console.log(chalk.green("Starting pipeframework..."));
+  console.log(chalk.green("Starting pipeframework... \n"));
 
   try {
-    checkFilesAndDirectories(FILTERS_DIRECTORY_NAME);
+    checkFilesAndDirectories(FILTERS_DIRECTORY_NAME, CONFIG_FILTERS_NAME);
   } catch (error) {
     console.log(chalk.red(error.message));
     process.exit(1);
@@ -54,21 +54,6 @@ const isModule = (filterModule) => {
 };
 
 /**
- * Check files and directories
- * @param {*} filtersDirectoryName
- */
-const checkFilesAndDirectories = (filtersDirectoryName) => {
-  checkDirectory(filtersDirectoryName);
-
-  const filterModules = findFilterModules(filtersDirectoryName);
-  filterModules.forEach((module) => {
-    isModule(require(`${process.cwd()}/${filtersDirectoryName}/${module}`));
-  });
-
-  isValidConfiguration(CONFIG_FILTERS_NAME);
-};
-
-/**
  * Check if configuration file for filters is valid
  * @param string configFiltersName
  */
@@ -110,6 +95,26 @@ const isValidConfiguration = (configFiltersName) => {
       );
     }
   });
+};
+
+/**
+ * Check files and directories
+ * @param string filtersDirectoryName
+ */
+const checkFilesAndDirectories = (filtersDirectoryName, configFiltersName) => {
+  checkDirectory(filtersDirectoryName);
+
+  const filterModules = findFilterModules(filtersDirectoryName);
+  filterModules.forEach((module) => {
+    isModule(require(`${process.cwd()}/${filtersDirectoryName}/${module}`));
+  });
+
+  console.log(chalk.yellow("Filters list :"));
+  filterModules.forEach((filter) => {
+    console.log(`- ${filter}`);
+  });
+
+  isValidConfiguration(configFiltersName);
 };
 
 start();
