@@ -127,6 +127,12 @@ const checkFilesAndDirectories = (filtersDirectoryName, configFiltersName) => {
   isValidConfiguration(configFiltersName);
 };
 
+/**
+ * Recursive function to run filter
+ * @param {*} config
+ * @param {*} stepKey
+ * @param {*} output
+ */
 const runFilter = (config, stepKey = 1, output = null) => {
   const name = config.steps[stepKey].filter;
   console.log(chalk.green(`Run ${name}`));
@@ -136,12 +142,21 @@ const runFilter = (config, stepKey = 1, output = null) => {
     ? [output, ...config.steps[stepKey].params]
     : [...config.steps[stepKey].params];
 
-  const result = module(params);
+  let result;
+  try {
+    result = module(params);
+  } catch {
+    throw new Error(`Step ${stepKey} failed`);
+  }
+
   const nextStep = config.steps[stepKey].next;
 
   if (nextStep) {
     runFilter(config, nextStep, result);
+    return;
   }
+
+  console.log(result);
 };
 
 start();

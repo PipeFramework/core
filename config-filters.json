@@ -1,7 +1,8 @@
 {
     "steps": {
-        "1": {"filter":"filters1.js","params": ["Test 1"], "next": "2"},
-        "2": {"filter":"filters1.js","params": ["Test 2"]}
-            
+        "1": {"filter":"read.js","params": [], "next": "2"},
+        "2": {"filter":"capitalize.js","params": [], "next": "3"},
+        "3": {"filter":"reverse.js","params": [], "next": "4"},
+        "4": {"filter":"write.js","params": ["./example/result.txt"]}
     }
 }
