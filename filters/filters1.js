@@ -1,3 +1,4 @@
 module.exports = (input) => {
-  "test";
+  console.log(input);
+  return "tata";
 };

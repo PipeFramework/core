@@ -1,6 +1,7 @@
 {
     "steps": {
-        "1": {"filter":"<filter_1>","params": [],"next":"2"},
-        "2": {"filter":"<filter_2>","params": []}
+        "1": {"filter":"filters1.js","params": ["Test 1"], "next": "2"},
+        "2": {"filter":"filters1.js","params": ["Test 2"]}
+            
     }
 }

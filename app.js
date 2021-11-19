@@ -9,6 +9,8 @@ const start = () => {
 
   try {
     checkFilesAndDirectories(FILTERS_DIRECTORY_NAME, CONFIG_FILTERS_NAME);
+    const config = getConfig(CONFIG_FILTERS_NAME);
+    runFilter(config);
   } catch (error) {
     console.log(chalk.red(error.message));
     process.exit(1);
@@ -62,14 +64,7 @@ const isValidConfiguration = (configFiltersName) => {
     throw new Error("Configuration file not found");
   }
 
-  const rawData = fs.readFileSync(`${process.cwd()}/${configFiltersName}.json`);
-
-  let config;
-  try {
-    config = JSON.parse(rawData);
-  } catch {
-    throw new Error("Configuration file is not a valid json file.");
-  }
+  const config = getConfig(configFiltersName);
 
   if (!config.steps) {
     throw new Error("The steps key is not found");
@@ -98,6 +93,21 @@ const isValidConfiguration = (configFiltersName) => {
 };
 
 /**
+ * Get configuration
+ *
+ * @param {*} configFiltersName
+ * @returns
+ */
+const getConfig = (configFiltersName) => {
+  const rawData = fs.readFileSync(`${process.cwd()}/${configFiltersName}.json`);
+  try {
+    return JSON.parse(rawData);
+  } catch {
+    throw new Error("Configuration file is not a valid json file.");
+  }
+};
+
+/**
  * Check files and directories
  * @param string filtersDirectoryName
  */
@@ -115,6 +125,23 @@ const checkFilesAndDirectories = (filtersDirectoryName, configFiltersName) => {
   });
 
   isValidConfiguration(configFiltersName);
+};
+
+const runFilter = (config, stepKey = 1, output = null) => {
+  const name = config.steps[stepKey].filter;
+  console.log(chalk.green(`Run ${name}`));
+
+  const module = require(`${process.cwd()}/${FILTERS_DIRECTORY_NAME}/${name}`);
+  const params = output
+    ? [output, ...config.steps[stepKey].params]
+    : [...config.steps[stepKey].params];
+
+  const result = module(params);
+  const nextStep = config.steps[stepKey].next;
+
+  if (nextStep) {
+    runFilter(config, nextStep, result);
+  }
 };
 
 start();
